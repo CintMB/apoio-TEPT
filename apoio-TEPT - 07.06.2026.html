@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Um cantinho seguro 🐾</title>
+<meta name="description" content="Um cantinho de apoio e acolhimento, com tema de gatinhos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* =================================================================
+     PALETA E TEMA  (edite as cores aqui se quiser)
+     ================================================================= */
+  :root{
+    --cream:#FBF8F4;
+    --cream2:#F4ECE2;
+    --card:#FFFFFF;
+    --peach:#E2876B;
+    --peach-d:#C9633F;
+    --peach-lt:#F6D8CC;
+    --sage:#7FA98C;
+    --sage-d:#5E8A6E;
+    --sage-lt:#E3EDE6;
+    --caramel:#C8956D;
+    --caramel-d:#A9774F;
+    --gold:#E7B86A;
+    --ink:#4A4039;
+    --ink-soft:#7C6F63;
+    --shadow:0 10px 30px rgba(122,90,60,.13);
+    --shadow-sm:0 4px 14px rgba(122,90,60,.10);
+    --radius:22px;
+    --display:'Baloo 2','Trebuchet MS',sans-serif;
+    --body:'Nunito',system-ui,-apple-system,sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:var(--body); color:var(--ink);
+    background:var(--cream);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(231,184,106,.10) 0 22%, transparent 22%),
+      radial-gradient(circle at 88% 8%, rgba(127,169,140,.10) 0 18%, transparent 18%),
+      radial-gradient(circle at 78% 92%, rgba(226,135,107,.10) 0 24%, transparent 24%);
+    background-attachment:fixed;
+    line-height:1.6; font-size:17px; -webkit-text-size-adjust:100%;
+    padding-bottom:96px;
+  }
+  h1,h2,h3{font-family:var(--display); font-weight:700; line-height:1.18; color:var(--ink); margin:0 0 .4em;}
+  p{margin:0 0 1em;}
+  a{color:var(--peach-d);}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:760px; margin:0 auto; padding:0 18px;}
+  .skip{position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:8px 14px; border-radius:8px; z-index:200;}
+  .skip:focus{left:10px; top:10px;}
+
+  /* ---------- header / nav ---------- */
+  header{position:sticky; top:0; z-index:50; background:rgba(251,248,244,.92);
+    backdrop-filter:blur(8px); border-bottom:2px dotted var(--peach-lt);}
+  .brand{display:flex; align-items:center; gap:10px; padding:12px 18px 6px; max-width:760px; margin:0 auto;}
+  .brand .logo{width:42px; height:42px; flex:none;}
+  .brand b{font-family:var(--display); font-size:1.18rem; color:var(--caramel-d);}
+  nav{max-width:760px; margin:0 auto; padding:0 10px 10px; display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;}
+  nav::-webkit-scrollbar{display:none;}
+  .tab{flex:none; border:none; background:transparent; font-family:var(--display); font-weight:600;
+    font-size:.95rem; color:var(--ink-soft); padding:8px 14px; border-radius:999px; cursor:pointer;
+    display:flex; align-items:center; gap:6px; transition:all .18s;}
+  .tab:hover{background:var(--cream2); color:var(--ink);}
+  .tab[aria-current="true"]{background:var(--peach); color:#fff; box-shadow:var(--shadow-sm);}
+  .tab svg{width:16px; height:16px;}
+
+  /* ---------- sections ---------- */
+  main{padding:26px 0 10px;}
+  .panel{display:none; animation:fade .45s ease both;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+  .eyebrow{font-family:var(--display); text-transform:uppercase; letter-spacing:.12em; font-size:.74rem;
+    font-weight:700; color:var(--peach-d); margin-bottom:6px;}
+  .lead{font-size:1.06rem; color:var(--ink-soft);}
+
+  /* cards */
+  .card{background:var(--card); border-radius:var(--radius); padding:22px 22px; box-shadow:var(--shadow-sm);
+    margin-bottom:16px; border:1px solid rgba(200,149,109,.12);}
+  .card h3{display:flex; align-items:center; gap:10px; color:var(--caramel-d); font-size:1.18rem;}
+  .pawbullet{width:22px; height:22px; color:var(--peach); flex:none;}
+
+  .disclaimer{background:var(--sage-lt); border-radius:18px; padding:14px 18px; font-size:.92rem;
+    color:var(--sage-d); display:flex; gap:12px; align-items:flex-start; margin:18px 0;}
+  .disclaimer svg{width:22px; height:22px; flex:none; color:var(--sage-d); margin-top:2px;}
+
+  /* hero */
+  .hero{text-align:center; padding:10px 6px 0;}
+  .hero .cat{width:160px; height:160px; margin:0 auto; display:block;
+    animation:bob 4.5s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg);} 50%{transform:translateY(-8px) rotate(1deg);}}
+  .hero h1{font-size:2.1rem; margin-top:6px;}
+  .hero h1 .accent{color:var(--peach-d);}
+
+  /* mascot speech */
+  .mascot{display:flex; align-items:center; gap:14px; background:var(--cream2); border-radius:20px;
+    padding:14px 18px; margin:18px 0; box-shadow:var(--shadow-sm);}
+  .mascot .cat{width:58px; height:58px; flex:none;}
+  .mascot .bubble{font-family:var(--display); font-weight:600; color:var(--caramel-d); font-size:1rem;}
+
+  /* buttons */
+  .btn{font-family:var(--display); font-weight:700; border:none; cursor:pointer; border-radius:999px;
+    padding:13px 22px; font-size:1rem; transition:transform .15s, box-shadow .15s; display:inline-flex;
+    align-items:center; gap:9px;}
+  .btn:active{transform:scale(.96);}
+  .btn-primary{background:var(--peach-d); color:#fff; box-shadow:var(--shadow-sm);}
+  .btn-primary:hover{box-shadow:var(--shadow);}
+  .btn-ghost{background:var(--cream2); color:var(--ink);}
+  .btn-ghost:hover{background:var(--peach-lt);}
+  .btn svg{width:18px; height:18px;}
+
+  /* ---------- flashcards ---------- */
+  .deckpick{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+  .deckbtn{flex:1 1 30%; min-width:140px; border:2px solid var(--peach-lt); background:var(--card);
+    border-radius:16px; padding:12px; font-family:var(--display); font-weight:600; color:var(--ink-soft);
+    cursor:pointer; transition:all .18s;}
+  .deckbtn[aria-current="true"]{border-color:var(--peach); background:var(--peach-lt); color:var(--caramel-d);}
+  .deckbtn small{display:block; font-family:var(--body); font-weight:400; font-size:.78rem; margin-top:3px;}
+
+  .flashcard{width:100%; margin-bottom:14px;}
+  .flip{display:block; width:100%; cursor:pointer; border:none; background:none; padding:0; font:inherit; color:inherit; text-align:center;}
+  .face{border-radius:var(--radius); padding:30px 26px; min-height:280px; display:flex;
+    flex-direction:column; align-items:center; justify-content:center; box-shadow:var(--shadow);
+    animation:faceIn .35s ease both;}
+  .back{display:none;}
+  .flip.flipped .front{display:none;}
+  .flip.flipped .back{display:flex;}
+  @keyframes faceIn{from{opacity:0; transform:scale(.97);} to{opacity:1; transform:none;}}
+  .face .tag{font-family:var(--display); text-transform:uppercase; letter-spacing:.1em; font-size:.72rem;
+    font-weight:700; margin-bottom:14px; opacity:.8;}
+  .face p{font-size:1.18rem; line-height:1.5; margin:0;}
+  .front{background:var(--card); color:var(--ink);
+    background-image:radial-gradient(circle at 90% 12%, var(--peach-lt) 0 18px, transparent 18px);}
+  .front .tag{color:var(--peach-d);}
+  .back{background:var(--sage); color:#fff;
+    background-image:radial-gradient(circle at 12% 88%, rgba(255,255,255,.14) 0 30px, transparent 30px),
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,.12) 0 22px, transparent 22px);}
+  .back .tag{color:#fff;}
+  .hint{font-size:.82rem; color:var(--ink-soft); margin-top:16px; font-style:italic;}
+  .deckctrl{display:flex; align-items:center; justify-content:center; gap:10px; margin-top:8px; flex-wrap:wrap;}
+  .counter{font-family:var(--display); font-weight:600; color:var(--ink-soft); min-width:54px; text-align:center;}
+  .iconbtn{width:48px; height:48px; border-radius:50%; border:none; background:var(--cream2); cursor:pointer;
+    display:grid; place-items:center; color:var(--caramel-d); transition:all .15s;}
+  .iconbtn:hover{background:var(--peach-lt);}
+  .iconbtn:active{transform:scale(.92);}
+  .iconbtn svg{width:22px; height:22px;}
+
+  /* ---------- 4F mini cards inside Entender ---------- */
+  .fgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px;}
+  .fitem{background:var(--cream2); border-radius:16px; padding:14px;}
+  .fitem b{font-family:var(--display); color:var(--peach-d); display:block; margin-bottom:3px;}
+  .fitem span{font-size:.9rem; color:var(--ink-soft);}
+
+  /* ---------- journal ---------- */
+  .journal textarea{width:100%; min-height:90px; border:2px solid var(--peach-lt); border-radius:16px;
+    padding:14px; font-family:var(--body); font-size:1rem; resize:vertical; color:var(--ink); background:var(--card);}
+  .journal textarea:focus{outline:3px solid var(--sage-lt); border-color:var(--sage);}
+  .jrow{display:flex; gap:10px; align-items:center; margin-top:10px; flex-wrap:wrap;}
+  .note{background:var(--card); border-radius:16px; padding:14px 16px; box-shadow:var(--shadow-sm);
+    margin-bottom:10px; border-left:5px solid var(--gold); position:relative;}
+  .note .meta{font-size:.76rem; color:var(--ink-soft); margin-bottom:4px;}
+  .note .del{position:absolute; top:10px; right:10px; background:none; border:none; cursor:pointer;
+    color:var(--ink-soft); font-size:1.1rem; line-height:1; padding:4px;}
+  .note .del:hover{color:var(--peach-d);}
+  .empty{color:var(--ink-soft); font-style:italic; text-align:center; padding:14px;}
+
+  /* ---------- resources ---------- */
+  .res{display:flex; gap:14px; align-items:flex-start; background:var(--card); border-radius:18px;
+    padding:16px 18px; box-shadow:var(--shadow-sm); margin-bottom:12px;}
+  .res .ico{width:46px; height:46px; border-radius:50%; background:var(--peach-lt); display:grid;
+    place-items:center; flex:none; color:var(--peach-d);}
+  .res .ico svg{width:24px; height:24px;}
+  .res b{font-family:var(--display); color:var(--caramel-d);}
+  .res .big{font-family:var(--display); font-weight:700; font-size:1.5rem; color:var(--peach-d);}
+
+  /* ---------- carta ampliada (zoom) ---------- */
+  .zoomwrap{position:fixed; inset:0; z-index:90; background:rgba(74,64,57,.55); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; padding:22px;}
+  .zoomwrap.open{display:flex; animation:fade .3s ease both;}
+  .zoomcard{background:var(--card); border-radius:26px; max-width:560px; width:100%; padding:40px 28px 30px;
+    box-shadow:0 24px 60px rgba(0,0,0,.3); text-align:center; position:relative;}
+  .zoomcard.isback{background:var(--sage); color:#fff;}
+  .zoomcard .tag{font-family:var(--display); text-transform:uppercase; letter-spacing:.1em; font-size:.78rem;
+    font-weight:700; color:var(--peach-d); margin-bottom:16px; display:block;}
+  .zoomcard.isback .tag{color:#fff;}
+  .zoomcard p{font-size:1.45rem; line-height:1.5; margin:0 0 24px;}
+  .zoomclose{position:absolute; top:12px; right:14px; background:var(--cream2); border:none; width:42px; height:42px;
+    border-radius:50%; font-size:1.4rem; cursor:pointer; color:var(--ink); line-height:1;}
+  .zoomcard.isback .zoomclose{background:rgba(255,255,255,.25); color:#fff;}
+  .zoomflip{font-family:var(--display); font-weight:700; border:none; cursor:pointer; border-radius:999px;
+    padding:12px 24px; font-size:1rem; background:var(--peach-d); color:#fff;}
+  .zoomcard.isback .zoomflip{background:#fff; color:var(--sage-d);}
+
+  /* ---------- floating calm button ---------- */
+  .calmfab{position:fixed; right:18px; bottom:18px; z-index:60; background:var(--sage-d); color:#fff;
+    border:none; border-radius:999px; padding:14px 20px; font-family:var(--display); font-weight:700;
+    font-size:1rem; cursor:pointer; box-shadow:0 12px 28px rgba(94,138,110,.4); display:flex; align-items:center; gap:9px;
+    animation:pulse 3.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 28px rgba(94,138,110,.4);} 50%{box-shadow:0 12px 34px rgba(94,138,110,.6);}}
+  .calmfab svg{width:20px; height:20px;}
+
+  /* ---------- calm overlay ---------- */
+  .overlay{position:fixed; inset:0; z-index:100; background:linear-gradient(160deg,#5E8A6E,#456b54);
+    color:#fff; display:none; flex-direction:column; align-items:center; padding:26px 20px; overflow-y:auto;}
+  .overlay.open{display:flex; animation:fade .4s ease both;}
+  .overlay .close{position:absolute; top:16px; right:16px; background:rgba(255,255,255,.2); border:none;
+    color:#fff; width:44px; height:44px; border-radius:50%; font-size:1.4rem; cursor:pointer; line-height:1;}
+  .overlay h2{color:#fff; text-align:center; font-size:1.7rem; margin-top:18px;}
+  .anchor{max-width:460px; text-align:center; font-size:1.15rem; line-height:1.55; margin:6px auto 22px;
+    background:rgba(255,255,255,.14); border-radius:20px; padding:18px 20px;}
+  .breath{display:flex; flex-direction:column; align-items:center; margin:6px 0 14px;}
+  .breathring{width:230px; height:230px; border-radius:50%; display:grid; place-items:center; position:relative;
+    background:radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,.05)); }
+  .breathcat{width:150px; height:120px; transition:transform 4s ease-in-out;}
+  .breathlabel{font-family:var(--display); font-weight:700; font-size:1.4rem; margin-top:14px; min-height:1.5em;}
+  .breathsub{font-size:.9rem; opacity:.85; margin-top:-2px;}
+  .steplist{max-width:480px; width:100%; margin:10px auto 30px; list-style:none; padding:0;}
+  .steplist li{background:rgba(255,255,255,.12); border-radius:16px; padding:14px 16px; margin-bottom:10px;
+    display:flex; gap:14px; align-items:flex-start; cursor:pointer; transition:background .15s;}
+  .steplist li:hover{background:rgba(255,255,255,.2);}
+  .steplist .num{width:30px; height:30px; border-radius:50%; background:rgba(255,255,255,.25); display:grid;
+    place-items:center; flex:none; font-family:var(--display); font-weight:700; transition:all .2s;}
+  .steplist li.done{opacity:.6;}
+  .steplist li.done .num{background:#fff; color:var(--sage-d);}
+  .steplist li.done .txt{text-decoration:line-through;}
+  .steplist b{font-family:var(--display);}
+  .steplist small{display:block; opacity:.9; font-weight:400;}
+
+  footer{text-align:center; padding:30px 18px 10px; color:var(--ink-soft); font-size:.84rem;}
+  footer .paw{width:26px; height:26px; color:var(--peach-lt); margin-bottom:6px;}
+
+  @media(max-width:520px){
+    .hero h1{font-size:1.7rem;} body{font-size:16px;}
+    .fgrid{grid-template-columns:1fr;} .face p{font-size:1.08rem;}
+  }
+
+  /* respeita quem prefere menos movimento */
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; scroll-behavior:auto;}
+    .breathcat{transition:none !important;}
+    .flip{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Pular para o conteúdo</a>
+
+<!-- ========================= CABEÇALHO ========================= -->
+<header>
+  <div class="brand">
+    <span class="logo" id="brandcat" aria-hidden="true"></span>
+    <b>Um cantinho seguro</b>
+  </div>
+  <nav aria-label="Seções">
+    <button class="tab" data-target="inicio" aria-current="true">Início</button>
+    <button class="tab" data-target="entender">Entender</button>
+    <button class="tab" data-target="cartas">Flashcards</button>
+    <button class="tab" data-target="espaco">Meu espaço</button>
+    <button class="tab" data-target="apoio">Apoio</button>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- ============ INÍCIO ============ -->
+  <section class="panel active" id="inicio" tabindex="-1" aria-label="Início">
+    <div class="hero">
+      <span class="cat" id="herocat" aria-hidden="true"></span>
+      <h1>Oi, você. <span class="accent">Que bom te ver.</span></h1>
+      <p class="lead">Este é um cantinho calminho, feito com muito carinho, para te acompanhar nos dias bons e nos difíceis. Sem pressa, no seu ritmo. 🐾</p>
+    </div>
+
+    <div class="mascot">
+      <span class="cat" id="mascot1" aria-hidden="true"></span>
+      <span class="bubble" id="mascotmsg">Respira fundo. Você está em segurança aqui.</span>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" id="pw1" aria-hidden="true"></span>Como usar este cantinho</h3>
+      <p>Em <b>Entender</b>, você encontra resumos gentis sobre o que está acontecendo. Em <b>Flashcards</b>, cartinhas para reconhecer sinais e lembrar o que ajuda. Em <b>Meu espaço</b>, um lugar só seu para escrever. E, sempre que precisar, o botão verde <b>“Preciso de calma agora”</b> te leva a um respiro guiado.</p>
+    </div>
+
+    <div class="disclaimer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div>Este site é um <b>apoio</b>, um abraço em forma de cantinho — e <b>não substitui</b> o acompanhamento de um profissional de saúde. Se você estiver em sofrimento intenso, procure ajuda (veja a aba <b>Apoio</b>).</div>
+    </div>
+  </section>
+
+  <!-- ============ ENTENDER ============ -->
+  <section class="panel" id="entender" tabindex="-1" aria-label="Entender">
+    <div class="eyebrow">Resumos gentis</div>
+    <h1>Entender o que acontece</h1>
+    <p class="lead">Saber o que está por trás das ondas difíceis costuma trazer alívio. Aqui vão os conceitos principais, em palavras simples.</p>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>O que é o TEPT Complexo (TEPT-C)?</h3>
+      <p>É a forma como o corpo e a mente continuam reagindo a experiências repetidas de muito medo e desamparo na infância. Pense num <b>alarme interno</b> que aprendeu cedo demais a ficar de prontidão para te proteger. Ele foi essencial lá atrás — e hoje, às vezes, dispara diante de coisas que lembram o perigo antigo.</p>
+      <p style="margin:0;">É como um gatinho que se assusta com barulhos por causa de sustos do passado, mesmo agora, seguro em casa. <b>Não é fraqueza nem exagero.</b></p>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>As 5 marcas mais comuns</h3>
+      <p style="margin:0;">Flashbacks emocionais &bull; vergonha tóxica &bull; autoabandono (esquecer de cuidar de si) &bull; um crítico interno severo &bull; ansiedade social. Você pode reconhecer algumas, todas ou poucas — cada pessoa é de um jeito.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>Flashbacks emocionais</h3>
+      <p>Diferente do que se vê nos filmes, eles quase nunca vêm como imagens. Vêm como uma <b>enxurrada repentina de sentimentos antigos</b>: medo, vergonha, a sensação de ficar pequena e sem saída.</p>
+      <p style="margin:0;">Podem ser sutis ou enormes, durar minutos ou dias. E, como toda onda, eles sobem… e passam. <b>É um eco do passado; o perigo já passou.</b></p>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>Os 4 Fs: jeitos de sobreviver</h3>
+      <p>Diante do perigo, toda criança encontra um jeito de se proteger. Não eram defeitos — eram <b>estratégias inteligentes</b>:</p>
+      <div class="fgrid">
+        <div class="fitem"><b>Lutar</b><span>Revidar, controlar, se defender.</span></div>
+        <div class="fitem"><b>Fugir</b><span>Se ocupar, correr, buscar a perfeição.</span></div>
+        <div class="fitem"><b>Congelar</b><span>Se desligar, “sumir”, se esconder.</span></div>
+        <div class="fitem"><b>Agradar</b><span>Cuidar do outro para se manter segura.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>O crítico interno</h3>
+      <p style="margin:0;">É aquela voz dura que cobra perfeição. Ela nasceu da tentativa de se sentir segura e amada — e exagera o perigo e a vergonha. A boa notícia: essa voz <b>pode encolher</b>, e uma voz mais gentil pode crescer no lugar dela.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>Quando a ansiedade dispara</h3>
+      <p>Picos de ansiedade são <b>muito comuns</b> para quem carrega esse histórico — faz todo sentido, não é frescura nem exagero. Eles costumam aparecer quando <b>vários fatores se somam</b> de uma vez.</p>
+      <p style="margin:0;">Um exemplo: o <b>crítico interno</b> exagerando o perigo, junto de um <b>medo antigo de ser abandonada</b> — que pode surgir como ciúme intenso ou insegurança nos relacionamentos. Quando isso se mistura, o corpo entra em alerta e a ansiedade sobe rápido. Lembre que é uma <b>onda</b>: ela sobe e passa. O <b>Modo Calma</b> ajuda a respirar e voltar ao presente, e levar esses momentos para a terapia ajuda a entender os gatilhos com cuidado.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>A recuperação acontece aos poucos</h3>
+      <p style="margin:0;">Não é uma linha reta. É <b>dois passos à frente e um atrás</b> — e cada passo conta. Com o tempo, os flashbacks ficam menos frequentes e intensos, o crítico perde força e vem mais calma. No seu tempo, você floresce.</p>
+    </div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section class="panel" id="cartas" tabindex="-1" aria-label="Flashcards">
+    <div class="eyebrow">Cartinhas de bolso</div>
+    <h1>Flashcards</h1>
+    <p class="lead">Toque na carta para virar. Escolha um baralho:</p>
+
+    <div class="deckpick" role="group" aria-label="Escolher baralho">
+      <button class="deckbtn" data-deck="sinais" aria-current="true">Identificar sinais<small>O que pode ser isto que sinto?</small></button>
+      <button class="deckbtn" data-deck="lidar">Como lidar<small>Passos gentis no momento</small></button>
+      <button class="deckbtn" data-deck="fs">Os 4 Fs<small>Jeitos de ter sobrevivido</small></button>
+    </div>
+
+    <div class="flashcard">
+      <button class="flip" id="flip" aria-pressed="false" aria-label="Carta. Toque para virar.">
+        <div class="face front">
+          <span class="tag">Quando acontece…</span>
+          <p id="cardFront"></p>
+        </div>
+        <div class="face back">
+          <span class="tag">Pode ser / o que ajuda</span>
+          <p id="cardBack"></p>
+        </div>
+      </button>
+    </div>
+    <p class="hint" id="cardHint">Toque na cartinha para ver o outro lado 🐾</p>
+
+    <div class="deckctrl">
+      <button class="iconbtn" id="prev" aria-label="Carta anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="counter" id="counter">1 / 1</span>
+      <button class="iconbtn" id="next" aria-label="Próxima carta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <button class="iconbtn" id="shuffle" aria-label="Embaralhar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4l3 3-3 3"/><path d="M18 20l3-3-3-3"/><path d="M3 7h3.5c1.2 0 2.3.6 3 1.6l4 5.8c.7 1 1.8 1.6 3 1.6H21"/><path d="M3 17h3.5c1.2 0 2.3-.6 3-1.6l.7-1"/><path d="M14.3 9.6l.7-1c.7-1 1.8-1.6 3-1.6H21"/></svg>
+      </button>
+      <button class="iconbtn" id="zoom" aria-label="Ampliar a carta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8.5v5M8.5 11h5"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ MEU ESPAÇO ============ -->
+  <section class="panel" id="espaco" tabindex="-1" aria-label="Meu espaço">
+    <div class="eyebrow">Só seu</div>
+    <h1>Meu espaço</h1>
+    <p class="lead">Um lugar para escrever o que vier — um desabafo, uma vitória pequena, um lembrete carinhoso. <b>Fica guardado só neste aparelho</b>, no seu navegador, e não é enviado para lugar nenhum.</p>
+
+    <div class="card journal">
+      <label for="jtext" style="font-family:var(--display); font-weight:600; color:var(--caramel-d); display:block; margin-bottom:8px;">O que você quer guardar hoje?</label>
+      <textarea id="jtext" placeholder="Escreva aqui…"></textarea>
+      <div class="jrow">
+        <button class="btn btn-primary" id="jadd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Guardar bilhetinho
+        </button>
+        <button class="btn btn-ghost" id="jclear">Apagar tudo</button>
+      </div>
+      <p id="jwarn" style="font-size:.82rem; color:var(--ink-soft); margin:10px 0 0;"></p>
+    </div>
+
+    <div id="notes" aria-live="polite"></div>
+  </section>
+
+  <!-- ============ APOIO ============ -->
+  <section class="panel" id="apoio" tabindex="-1" aria-label="Apoio">
+    <div class="eyebrow">Você não está sozinha</div>
+    <h1>Apoio e recursos</h1>
+    <p class="lead">Pedir ajuda é um ato de coragem e de cuidado. Aqui vão alguns caminhos.</p>
+
+    <div class="res">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+      <div>
+        <b>CVV — Centro de Valorização da Vida</b>
+        <p style="margin:.2em 0;">Apoio emocional gratuito e sigiloso, 24h por dia.</p>
+        <span class="big">188</span>
+        <p style="margin:.3em 0 0; font-size:.9rem;">Chat e e-mail em <a href="https://www.cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a></p>
+      </div>
+    </div>
+
+    <div class="res">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+      <div>
+        <b>Você já está cuidando de você</b>
+        <p style="margin:.2em 0 0;">Fazer terapia é um ato enorme de coragem e de amor-próprio. Você já busca ativamente o melhor jeito de lidar com tudo isso — e isso conta muito. Sua psicóloga e sua psiquiatra são fontes de apoio importantes nessa caminhada: contar com elas faz parte do cuidado, não é fraqueza. Nos dias difíceis, lembre que você não está sozinha nesse processo.</p>
+      </div>
+    </div>
+
+    <div class="res">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      <div>
+        <b>Você tem uma rede de apoio</b>
+        <p style="margin:.2em 0 0;">Existe gente que te ama e que está pronta pra te acolher sempre que você precisar — a qualquer hora, em qualquer dia. Você não precisa carregar nada sozinha. Quando bater a vontade de se isolar, lembre: pedir ajuda também é uma forma de se cuidar, e há quem queira muito estar ao seu lado.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer" style="margin-top:20px;">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 6.5 4 8.7 4 10.4 5.4 12 7.3 13.6 5.4 15.3 4 17.5 4 21 4 23.5 8 21.5 12 19 16.5 12 21 12 21z"/></svg>
+      <div>Lembre-se: ter um dia difícil não apaga o seu progresso. Você merece carinho — inclusive o seu.</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========================= RODAPÉ ========================= -->
+<footer class="wrap">
+  <div class="paw" id="footpaw" aria-hidden="true"></div>
+  <p>Feito com muito carinho. 🐾<br>
+  Conteúdo inspirado no livro de Pete Walker, <i>“TEPT Complexo: Do Sobreviver ao Florescer”</i>.<br>
+  Este material é um gesto de apoio e não substitui o acompanhamento de um profissional de saúde.</p>
+</footer>
+
+<!-- ========================= BOTÃO FLUTUANTE ========================= -->
+<button class="calmfab" id="calmfab" aria-label="Abrir modo calma">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 6.5 4 8.7 4 10.4 5.4 12 7.3 13.6 5.4 15.3 4 17.5 4 21 4 23.5 8 21.5 12 19 16.5 12 21 12 21z"/></svg>
+  Preciso de calma agora
+</button>
+
+<!-- ========================= CARTA AMPLIADA (ZOOM) ========================= -->
+<div class="zoomwrap" id="zoomwrap" role="dialog" aria-modal="true" aria-label="Carta ampliada">
+  <div class="zoomcard" id="zoomcard">
+    <button class="zoomclose" id="zoomclose" aria-label="Fechar">&times;</button>
+    <span class="tag" id="zoomtag"></span>
+    <p id="zoomtext"></p>
+    <button class="zoomflip" id="zoomflip">Virar carta</button>
+  </div>
+</div>
+
+<!-- ========================= MODO CALMA ========================= -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Modo calma">
+  <button class="close" id="calmclose" aria-label="Fechar">&times;</button>
+  <h2>Respira comigo 🐾</h2>
+  <p class="anchor">“Eu sinto medo, mas não estou em perigo. O perigo já passou. Estou em segurança, aqui e agora.”</p>
+
+  <div class="breath">
+    <div class="breathring">
+      <span class="breathcat" id="breathcat" aria-hidden="true"></span>
+    </div>
+    <div class="breathlabel" id="breathlabel" aria-live="polite">Toque em começar</div>
+    <div class="breathsub" id="breathsub">inspira 4 &bull; segura 4 &bull; expira 6</div>
+    <div style="margin-top:14px;">
+      <button class="btn btn-ghost" id="breathtoggle" style="background:rgba(255,255,255,.18); color:#fff;">Começar a respirar</button>
+    </div>
+  </div>
+
+  <ul class="steplist" id="steplist" aria-label="Passos para atravessar o momento">
+    <li data-step><span class="num">1</span><span class="txt"><b>Nomeie:</b> <small>“Isto é um flashback.”</small></span></li>
+    <li data-step><span class="num">2</span><span class="txt"><b>Lembre:</b> <small>“Sinto medo, mas estou segura. Isto é o passado.”</small></span></li>
+    <li data-step><span class="num">3</span><span class="txt"><b>Volte ao corpo:</b> <small>respire devagar, solte os músculos, desacelere.</small></span></li>
+    <li data-step><span class="num">4</span><span class="txt"><b>Acolha a criança interna:</b> <small>“Estou aqui com você. Você não está sozinha.”</small></span></li>
+    <li data-step><span class="num">5</span><span class="txt"><b>Suavize o crítico:</b> <small>“Esta onda vai passar, como sempre passou.”</small></span></li>
+    <li data-step><span class="num">6</span><span class="txt"><b>Peça apoio e tenha paciência:</b> <small>você não precisa atravessar isso sozinha.</small></span></li>
+  </ul>
+</div>
+
+<script>
+/* =====================================================================
+   GATINHOS EM SVG  (desenhados no código, sem imagens externas)
+   ===================================================================== */
+function sittingCat(){return `
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <path d="M86 96 q28 0 24 -28 q-3 -18 -17 -15 q11 6 7 20 q-4 16 -20 13 z" fill="#A9774F"/>
+  <path d="M30 98 Q30 58 60 58 Q90 58 90 98 Z" fill="#C8956D"/>
+  <ellipse cx="60" cy="90" rx="15" ry="15" fill="#F4ECE2"/>
+  <path d="M36 30 L33 7 L57 24 Z" fill="#C8956D"/>
+  <path d="M84 30 L87 7 L63 24 Z" fill="#C8956D"/>
+  <path d="M41 27 L40 15 L52 24 Z" fill="#E2876B"/>
+  <path d="M79 27 L80 15 L68 24 Z" fill="#E2876B"/>
+  <circle cx="60" cy="47" r="30" fill="#C8956D"/>
+  <circle cx="46" cy="55" r="6.5" fill="#F2C4A8" opacity=".7"/>
+  <circle cx="74" cy="55" r="6.5" fill="#F2C4A8" opacity=".7"/>
+  <path d="M43 47 q6 7 13 0" stroke="#4A4039" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M64 47 q6 7 13 0" stroke="#4A4039" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M56 56 L64 56 L60 61 Z" fill="#C9633F"/>
+  <path d="M60 61 q-4 5 -8 2 M60 61 q4 5 8 2" stroke="#4A4039" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <g stroke="#9C8B7A" stroke-width="1.6" stroke-linecap="round">
+    <line x1="28" y1="53" x2="43" y2="55"/><line x1="28" y1="60" x2="43" y2="59"/>
+    <line x1="92" y1="53" x2="77" y2="55"/><line x1="92" y1="60" x2="77" y2="59"/></g>
+</svg>`;}
+
+function curledCat(){return `
+<svg viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="88" cy="84" rx="66" ry="40" fill="#C8956D"/>
+  <ellipse cx="95" cy="88" rx="44" ry="26" fill="#D9B187"/>
+  <path d="M30 96 Q14 80 30 64 Q46 56 58 70" stroke="#A9774F" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M30 50 L25 30 L47 46 Z" fill="#C8956D"/>
+  <path d="M62 48 L72 30 L50 44 Z" fill="#C8956D"/>
+  <path d="M33 47 L31 36 L43 45 Z" fill="#E2876B"/>
+  <circle cx="46" cy="64" r="25" fill="#C8956D"/>
+  <circle cx="38" cy="70" r="5" fill="#F2C4A8" opacity=".7"/>
+  <path d="M33 64 q6 5 12 0" stroke="#4A4039" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M49 64 q6 5 12 0" stroke="#4A4039" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M44 72 L52 72 L48 76 Z" fill="#C9633F"/>
+</svg>`;}
+
+function pawSvg(){return `
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+  <ellipse cx="32" cy="42" rx="16" ry="13"/>
+  <circle cx="13" cy="26" r="6"/><circle cx="25" cy="16" r="6.5"/>
+  <circle cx="39" cy="16" r="6.5"/><circle cx="51" cy="26" r="6"/>
+</svg>`;}
+
+document.getElementById('brandcat').innerHTML = sittingCat();
+document.getElementById('herocat').innerHTML = sittingCat();
+document.getElementById('mascot1').innerHTML = sittingCat();
+document.getElementById('breathcat').innerHTML = curledCat();
+document.getElementById('footpaw').innerHTML = pawSvg();
+document.querySelectorAll('.pawbullet').forEach(function(el){el.innerHTML = pawSvg();});
+
+/* =====================================================================
+   NAVEGAÇÃO POR ABAS
+   ===================================================================== */
+var tabs = document.querySelectorAll('.tab');
+var panels = document.querySelectorAll('.panel');
+tabs.forEach(function(tab){
+  tab.addEventListener('click', function(){
+    var target = tab.dataset.target;
+    tabs.forEach(function(t){ t.setAttribute('aria-current', t===tab ? 'true':'false'); });
+    panels.forEach(function(p){ p.classList.toggle('active', p.id===target); });
+    var panel = document.getElementById(target);
+    if(panel){ panel.focus(); window.scrollTo({top:0, behavior:'smooth'}); }
+  });
+});
+
+/* =====================================================================
+   MASCOTE: FRASES QUE GIRAM
+   ===================================================================== */
+var frases = [
+  "Respira fundo. Você está em segurança aqui.",
+  "Um passo de cada vez. Tô aqui com você.",
+  "Você está indo bem, no seu ritmo.",
+  "Ter um dia difícil não apaga o seu progresso.",
+  "Você merece carinho — inclusive o seu.",
+  "A onda sobe… e também passa. 🐾"
+];
+var fi = 0;
+var msgEl = document.getElementById('mascotmsg');
+setInterval(function(){
+  fi = (fi+1) % frases.length;
+  msgEl.style.opacity = 0;
+  setTimeout(function(){ msgEl.textContent = frases[fi]; msgEl.style.opacity = 1; }, 250);
+}, 5000);
+msgEl.style.transition = 'opacity .3s';
+
+/* =====================================================================
+   FLASHCARDS
+   ===================================================================== */
+var decks = {
+  sinais: [
+    {f:"Do nada me sinto pequena, com medo e sem saída, mesmo sem nada de errado acontecendo agora.",
+     b:"Pode ser um flashback emocional — uma onda de sentimentos antigos. Não é o presente; é um eco do passado. Você está segura agora."},
+    {f:"Uma voz dentro de mim diz que sou um fracasso e que tudo vai dar errado.",
+     b:"Esse é o crítico interno. Ele aprendeu a “proteger” você cobrando perfeição, mas exagera o perigo. Você pode responder a ele com gentileza."},
+    {f:"Sinto uma vergonha enorme, como se eu fosse errada por existir.",
+     b:"Vergonha tóxica. É uma marca do trauma — não a verdade sobre quem você é."},
+    {f:"Estou evitando as pessoas e travo em situações sociais simples.",
+     b:"Pode ser a ansiedade social que costuma vir junto. Faz sentido se proteger; e, aos poucos, dá para reaprender que nem todo mundo é perigo."},
+    {f:"Bateu uma onda forte de ansiedade, misturando ciúme e medo de ser abandonada.",
+     b:"Faz sentido: o crítico interno e um medo antigo de abandono podem se somar e disparar a ansiedade de uma vez. É uma onda — ela passa. Respire, volte ao presente e, se puder, leve isso para a terapia."},
+    {f:"Percebi que cuido de todo mundo, menos de mim.",
+     b:"Isso pode ser autoabandono — e também a resposta “agradar”. Você também merece o seu próprio cuidado."},
+    {f:"Meu coração dispara e dá vontade de sumir, sem um motivo claro.",
+     b:"O corpo pode estar em alerta antigo (luta/fuga). Respire devagar: o seu corpo de hoje tem recursos que a criança não tinha."},
+    {f:"Um cheiro, um tom de voz ou uma data me derrubam de repente.",
+     b:"São gatilhos. Não são fraqueza — são lembranças que o corpo guardou. Notar o gatilho já ajuda a entender a onda."}
+  ],
+  lidar: [
+    {f:"Estou no meio de um flashback.",
+     b:"1) Nomeie: “isto é um flashback”. 2) Lembre: “sinto medo, mas estou segura”. 3) Respire devagar e desacelere."},
+    {f:"Meu crítico interno está implacável hoje.",
+     b:"Perceba a voz, diga “não” a ela com carinho e troque a autocrítica por uma lista das suas qualidades e conquistas."},
+    {f:"Sinto que vou ser engolida pela emoção.",
+     b:"Toda onda sobe e passa. Você pode se enrolar num cobertor e esperar passar, como um gatinho num cantinho seguro."},
+    {f:"Estou me cobrando por ter recaído.",
+     b:"Recuperação é dois passos à frente e um atrás. Um flashback não apaga o seu progresso. Seja gentil com você."},
+    {f:"Quero me isolar de todo mundo.",
+     b:"Tudo bem precisar de um tempo sozinha. Mas não deixe a vergonha te isolar: avise alguém de confiança que hoje está difícil."},
+    {f:"Não consigo voltar para o presente.",
+     b:"Ancore os sentidos: 5 coisas que vê, 4 que ouve, 3 que toca, 2 que cheira, 1 que sente o gosto. Traga o corpo para o agora."}
+  ],
+  fs: [
+    {f:"Lutar 🐱",
+     b:"Quando o perigo aparecia, revidar e se defender ajudava a sobreviver. Hoje pode virar irritação ou controle. Foi coragem — e dá para aprender a usá-la só quando precisa."},
+    {f:"Fugir 🐱",
+     b:"Se manter ocupada, correr, buscar a perfeição: um jeito de escapar da dor. Foi proteção. Você também merece poder descansar."},
+    {f:"Congelar 🐱",
+     b:"Quando reagir parecia impossível, “sumir” e se desligar protegia. Não foi fraqueza — foi o corpo te poupando. Voltar ao presente, devagar, é seguro."},
+    {f:"Agradar 🐱",
+     b:"Cuidar do outro e agradar mantinha você segura. Faz sentido. Agora você também pode existir para si mesma, com seus limites."}
+  ]
+};
+
+var currentDeck = 'sinais';
+var idx = 0;
+var flipEl = document.getElementById('flip');
+var frontEl = document.getElementById('cardFront');
+var backEl = document.getElementById('cardBack');
+var counterEl = document.getElementById('counter');
+var deckBtns = document.querySelectorAll('.deckbtn');
+
+function renderCard(){
+  var card = decks[currentDeck][idx];
+  flipEl.classList.remove('flipped');
+  flipEl.setAttribute('aria-pressed','false');
+  frontEl.textContent = card.f;
+  backEl.textContent = card.b;
+  counterEl.textContent = (idx+1) + ' / ' + decks[currentDeck].length;
+}
+function flipCard(){
+  var now = flipEl.classList.toggle('flipped');
+  flipEl.setAttribute('aria-pressed', now ? 'true':'false');
+}
+flipEl.addEventListener('click', flipCard);
+
+document.getElementById('next').addEventListener('click', function(){
+  idx = (idx+1) % decks[currentDeck].length; renderCard();
+});
+document.getElementById('prev').addEventListener('click', function(){
+  idx = (idx-1+decks[currentDeck].length) % decks[currentDeck].length; renderCard();
+});
+document.getElementById('shuffle').addEventListener('click', function(){
+  idx = Math.floor(Math.random()*decks[currentDeck].length); renderCard();
+});
+deckBtns.forEach(function(b){
+  b.addEventListener('click', function(){
+    currentDeck = b.dataset.deck; idx = 0;
+    deckBtns.forEach(function(x){ x.setAttribute('aria-current', x===b ? 'true':'false'); });
+    renderCard();
+  });
+});
+renderCard();
+
+/* ---- carta ampliada (zoom) ---- */
+var zoomwrap = document.getElementById('zoomwrap');
+var zoomcard = document.getElementById('zoomcard');
+var zoomtag = document.getElementById('zoomtag');
+var zoomtext = document.getElementById('zoomtext');
+var zoomShowingBack = false;
+function fillZoom(){
+  var card = decks[currentDeck][idx];
+  if(zoomShowingBack){
+    zoomcard.classList.add('isback');
+    zoomtag.textContent = 'Pode ser / o que ajuda';
+    zoomtext.textContent = card.b;
+  }else{
+    zoomcard.classList.remove('isback');
+    zoomtag.textContent = 'Quando acontece…';
+    zoomtext.textContent = card.f;
+  }
+}
+function openZoom(){
+  zoomShowingBack = flipEl.classList.contains('flipped'); // mostra o lado que está visível
+  fillZoom();
+  zoomwrap.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('zoomclose').focus();
+}
+function closeZoom(){ zoomwrap.classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('zoom').addEventListener('click', openZoom);
+document.getElementById('zoomclose').addEventListener('click', closeZoom);
+document.getElementById('zoomflip').addEventListener('click', function(){
+  zoomShowingBack = !zoomShowingBack; fillZoom();
+});
+zoomwrap.addEventListener('click', function(e){ if(e.target === zoomwrap) closeZoom(); });
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape' && zoomwrap.classList.contains('open')) closeZoom();
+});
+
+/* =====================================================================
+   MEU ESPAÇO (diário no localStorage — fica só neste aparelho)
+   ===================================================================== */
+var STORAGE_KEY = 'cantinho_bilhetes_v1';
+var notesEl = document.getElementById('notes');
+var jtext = document.getElementById('jtext');
+var jwarn = document.getElementById('jwarn');
+var storageOK = true;
+
+function loadNotes(){
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ storageOK = false; return []; }
+}
+function saveNotes(list){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+  catch(e){
+    storageOK = false;
+    jwarn.textContent = 'Não consegui guardar neste navegador (pode estar em modo privado). Os bilhetes não vão ficar salvos aqui.';
+  }
+}
+function renderNotes(){
+  var list = loadNotes();
+  if(!storageOK){
+    jwarn.textContent = 'Obs: este navegador não permite guardar os bilhetes (talvez modo privado). Eles podem não ficar salvos.';
+  }
+  if(list.length === 0){
+    notesEl.innerHTML = '<p class="empty">Ainda não há bilhetinhos. Quando quiser, escreva o primeiro. 🐾</p>';
+    return;
+  }
+  notesEl.innerHTML = '';
+  list.forEach(function(n, i){
+    var div = document.createElement('div');
+    div.className = 'note';
+    var meta = document.createElement('div'); meta.className='meta'; meta.textContent = n.date;
+    var p = document.createElement('div'); p.textContent = n.text;
+    var del = document.createElement('button');
+    del.className='del'; del.setAttribute('aria-label','Apagar este bilhete'); del.textContent='✕';
+    del.addEventListener('click', function(){
+      var arr = loadNotes(); arr.splice(i,1); saveNotes(arr); renderNotes();
+    });
+    div.appendChild(meta); div.appendChild(p); div.appendChild(del);
+    notesEl.appendChild(div);
+  });
+}
+document.getElementById('jadd').addEventListener('click', function(){
+  var txt = jtext.value.trim();
+  if(!txt) return;
+  var list = loadNotes();
+  var d = new Date();
+  var data = d.toLocaleDateString('pt-BR') + ' · ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  list.unshift({text:txt, date:data});
+  saveNotes(list); jtext.value=''; renderNotes();
+});
+document.getElementById('jclear').addEventListener('click', function(){
+  if(confirm('Apagar todos os bilhetinhos? Isso não tem como desfazer.')){
+    saveNotes([]); renderNotes();
+  }
+});
+renderNotes();
+
+/* =====================================================================
+   MODO CALMA + RESPIRAÇÃO
+   ===================================================================== */
+var overlay = document.getElementById('overlay');
+var calmcat = document.getElementById('breathcat');
+var blabel = document.getElementById('breathlabel');
+var btoggle = document.getElementById('breathtoggle');
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var breathing = false;
+var breathTimer = null;
+
+function openCalm(){ overlay.classList.add('open'); document.body.style.overflow='hidden'; document.getElementById('calmclose').focus(); }
+function closeCalm(){ overlay.classList.remove('open'); document.body.style.overflow=''; stopBreath(); }
+document.getElementById('calmfab').addEventListener('click', openCalm);
+document.getElementById('calmclose').addEventListener('click', closeCalm);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeCalm(); });
+
+// fases: inspirar 4s, segurar 4s, expirar 6s
+var phases = [
+  {label:'Inspire…', scale:1.18, ms:4000},
+  {label:'Segure…',  scale:1.18, ms:4000},
+  {label:'Expire…',  scale:0.82, ms:6000}
+];
+var pi = 0;
+function runPhase(){
+  var ph = phases[pi];
+  blabel.textContent = ph.label;
+  if(!reduceMotion){
+    calmcat.style.transitionDuration = (ph.ms/1000) + 's';
+    calmcat.style.transform = 'scale(' + ph.scale + ')';
+  }
+  breathTimer = setTimeout(function(){ pi=(pi+1)%phases.length; runPhase(); }, ph.ms);
+}
+function startBreath(){
+  breathing = true; pi = 0; btoggle.textContent = 'Pausar';
+  runPhase();
+}
+function stopBreath(){
+  breathing = false; btoggle.textContent = 'Começar a respirar';
+  if(breathTimer) clearTimeout(breathTimer);
+  blabel.textContent = 'Quando quiser, recomece';
+  calmcat.style.transitionDuration = '1s';
+  calmcat.style.transform = 'scale(1)';
+}
+btoggle.addEventListener('click', function(){
+  if(breathing) stopBreath(); else startBreath();
+});
+
+// passos: marcar como feito ao tocar
+document.querySelectorAll('#steplist li').forEach(function(li){
+  li.addEventListener('click', function(){ li.classList.toggle('done'); });
+});
+</script>
+</body>
+</html>
