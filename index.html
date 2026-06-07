@@ -181,6 +181,17 @@
   .res b{font-family:var(--display); color:var(--caramel-d);}
   .res .big{font-family:var(--display); font-weight:700; font-size:1.5rem; color:var(--peach-d);}
 
+  /* ---------- nota técnica + cérebro + práticas + referências ---------- */
+  .tecnica{background:var(--cream2); border-radius:14px; padding:12px 15px; margin-top:14px; font-size:.9rem; color:var(--ink-soft); line-height:1.55;}
+  .tecnica b.lbl{display:block; font-family:var(--display); text-transform:uppercase; letter-spacing:.08em; font-size:.66rem; color:var(--caramel-d); margin-bottom:4px;}
+  .brainrow{background:var(--cream2); border-radius:14px; padding:12px 15px; margin-top:10px;}
+  .brainrow b{font-family:var(--display); color:var(--peach-d); display:block; margin-bottom:2px;}
+  .brainrow span{font-size:.92rem; color:var(--ink-soft); line-height:1.5;}
+  .fitem .ftag{display:block; margin-top:6px; font-size:.8rem; color:var(--sage-d); font-style:italic;}
+  .res .emoji{font-size:1.5rem; line-height:1;}
+  .mediatype{font-size:.85rem; color:var(--ink-soft);}
+  .refs{font-size:.8rem; color:var(--ink-soft); font-style:italic; margin:12px 0 0;}
+
   /* ---------- carta ampliada (zoom) ---------- */
   .zoomwrap{position:fixed; inset:0; z-index:90; background:rgba(74,64,57,.55); backdrop-filter:blur(3px);
     display:none; align-items:center; justify-content:center; padding:22px;}
@@ -262,7 +273,9 @@
   <nav aria-label="Seções">
     <button class="tab" data-target="inicio" aria-current="true">Início</button>
     <button class="tab" data-target="entender">Entender</button>
+    <button class="tab" data-target="diaadia">No dia a dia</button>
     <button class="tab" data-target="cartas">Flashcards</button>
+    <button class="tab" data-target="assistir">Pra assistir</button>
     <button class="tab" data-target="espaco">Meu espaço</button>
     <button class="tab" data-target="apoio">Apoio</button>
   </nav>
@@ -304,6 +317,16 @@
       <h3><span class="pawbullet" aria-hidden="true"></span>O que é o TEPT Complexo (TEPT-C)?</h3>
       <p>É a forma como o corpo e a mente continuam reagindo a experiências repetidas de muito medo e desamparo na infância. Pense num <b>alarme interno</b> que aprendeu cedo demais a ficar de prontidão para te proteger. Ele foi essencial lá atrás — e hoje, às vezes, dispara diante de coisas que lembram o perigo antigo.</p>
       <p style="margin:0;">É como um gatinho que se assusta com barulhos por causa de sustos do passado, mesmo agora, seguro em casa. <b>Não é fraqueza nem exagero.</b></p>
+      <div class="tecnica"><b class="lbl">Nota técnica</b>Os manuais ainda divergem: o DSM-5 não lista o TEPT-C como diagnóstico separado, mas a CID-11 (da OMS) já reconhece o “TEPT Complexo” como categoria própria — os sintomas do TEPT somados a desregulação emocional, autoimagem negativa e dificuldade nos vínculos.</div>
+    </div>
+
+    <div class="card">
+      <h3><span class="pawbullet" aria-hidden="true"></span>O que acontece no cérebro</h3>
+      <p>Por que o passado às vezes invade o presente — num modelo simplificado (no cérebro real, essas áreas trabalham juntas):</p>
+      <div class="brainrow"><b>Amígdala — o detector de fumaça</b><span>Dispara o alarme de perigo antes do raciocínio. Walker chama o flashback de “sequestro da amígdala”: a memória emocional passa por cima do cérebro racional.</span></div>
+      <div class="brainrow"><b>Sistema simpático — o corpo em prontidão</b><span>Aciona a luta-ou-fuga e libera adrenalina e cortisol. O coração acelera e os músculos tensionam, prontos para um perigo que a mente jura ser real.</span></div>
+      <div class="brainrow"><b>Hipocampo — o carimbo de tempo</b><span>Normalmente organiza a memória no tempo e no espaço. Sob estresse intenso esse “carimbo” falha — e a lembrança volta sem data, sentida como agora.</span></div>
+      <div class="brainrow"><b>Neuroplasticidade — o que dá esperança</b><span>O cérebro segue se remodelando. Com repetição e segurança, novas vias se fortalecem: não apagam o passado, mas mudam a reação a ele.</span></div>
     </div>
 
     <div class="card">
@@ -315,22 +338,25 @@
       <h3><span class="pawbullet" aria-hidden="true"></span>Flashbacks emocionais</h3>
       <p>Diferente do que se vê nos filmes, eles quase nunca vêm como imagens. Vêm como uma <b>enxurrada repentina de sentimentos antigos</b>: medo, vergonha, a sensação de ficar pequena e sem saída.</p>
       <p style="margin:0;">Podem ser sutis ou enormes, durar minutos ou dias. E, como toda onda, eles sobem… e passam. <b>É um eco do passado; o perigo já passou.</b></p>
+      <div class="tecnica"><b class="lbl">Nota técnica</b>É o tal “sequestro da amígdala”: a memória emocional dispara sem os marcadores de tempo e lugar do hipocampo — por isso ela é sentida como presente, e não como passado.</div>
     </div>
 
     <div class="card">
       <h3><span class="pawbullet" aria-hidden="true"></span>Os 4 Fs: jeitos de sobreviver</h3>
       <p>Diante do perigo, toda criança encontra um jeito de se proteger. Não eram defeitos — eram <b>estratégias inteligentes</b>:</p>
       <div class="fgrid">
-        <div class="fitem"><b>Lutar</b><span>Revidar, controlar, se defender.</span></div>
-        <div class="fitem"><b>Fugir</b><span>Se ocupar, correr, buscar a perfeição.</span></div>
-        <div class="fitem"><b>Congelar</b><span>Se desligar, “sumir”, se esconder.</span></div>
-        <div class="fitem"><b>Agradar</b><span>Cuidar do outro para se manter segura.</span></div>
+        <div class="fitem"><b>Lutar</b><span>Revidar, controlar, enfrentar a ameaça.</span><span class="ftag">↳ pode endurecer em traços narcisistas</span></div>
+        <div class="fitem"><b>Fugir</b><span>Se ocupar, correr, buscar a perfeição.</span><span class="ftag">↳ pode virar padrão obsessivo-compulsivo</span></div>
+        <div class="fitem"><b>Congelar</b><span>Se desligar, “sumir”, dissociar.</span><span class="ftag">↳ raiz das respostas dissociativas</span></div>
+        <div class="fitem"><b>Agradar</b><span>Cuidar do outro para se sentir segura.</span><span class="ftag">↳ raiz da codependência</span></div>
       </div>
+      <p style="margin:12px 0 0; font-size:.92rem; color:var(--ink-soft);"><i>Quase ninguém usa só um “F” — a gente costuma misturar dois ou mais.</i></p>
     </div>
 
     <div class="card">
       <h3><span class="pawbullet" aria-hidden="true"></span>O crítico interno</h3>
-      <p style="margin:0;">É aquela voz dura que cobra perfeição. Ela nasceu da tentativa de se sentir segura e amada — e exagera o perigo e a vergonha. A boa notícia: essa voz <b>pode encolher</b>, e uma voz mais gentil pode crescer no lugar dela.</p>
+      <p>É aquela voz dura que cobra perfeição. Ela nasceu da tentativa de se sentir segura e amada — e exagera o perigo e a vergonha. A boa notícia: essa voz <b>pode encolher</b>, e uma voz mais gentil pode crescer no lugar dela.</p>
+      <div class="tecnica"><b class="lbl">Nota técnica · neuroplasticidade</b>Walker compara essa voz a um sulco aberto no cérebro, fundo de tanto uso. A boa notícia: dá para abrir novos sulcos noutra direção. Com prática repetida, uma voz mais gentil ganha espaço — devagar, mas ganha.</div>
     </div>
 
     <div class="card">
@@ -448,6 +474,48 @@
     </div>
   </section>
 
+  <!-- ============ NO DIA A DIA ============ -->
+  <section class="panel" id="diaadia" tabindex="-1" aria-label="No dia a dia">
+    <div class="eyebrow">Pequenas práticas</div>
+    <h1>O que ajuda no dia a dia</h1>
+    <p class="lead">Práticas simples que acalmam o sistema de alarme — cada uma com o seu porquê. Não precisa fazer tudo: uma só, repetida com gentileza, já muda muita coisa.</p>
+
+    <div class="res"><span class="ico"><span class="emoji">🧘</span></span><div><b>Ioga (com calma)</b><p style="margin:.2em 0 0;">Reconecta corpo e mente e ativa o nervo vago, o “freio” natural do corpo. Há estudos de que a ioga sensível ao trauma reduz sintomas de TEPT.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">🌬️</span></span><div><b>Respiração lenta</b><p style="margin:.2em 0 0;">Expirar mais devagar do que inspirar liga o sistema parassimpático e baixa o ritmo cardíaco em poucos minutos. (O <b>Modo Calma</b> aqui te guia nisso.)</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">🚶‍♀️</span></span><div><b>Movimento</b><p style="margin:.2em 0 0;">Caminhar, dançar ou correr queima a adrenalina presa e libera endorfinas — ajuda a “fechar” o ciclo de luta-ou-fuga.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">🖐️</span></span><div><b>Aterramento (5 sentidos)</b><p style="margin:.2em 0 0;">Nomear o que você vê, ouve e toca traz o córtex pré-frontal de volta e ancora você no presente.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">✍️</span></span><div><b>Escrever</b><p style="margin:.2em 0 0;">Pôr em palavras ajuda o cérebro a organizar a lembrança no tempo — justamente o “carimbo” que falha no flashback. (Tem o <b>Meu espaço</b> pra isso.)</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">🤝</span></span><div><b>Conexão segura</b><p style="margin:.2em 0 0;">Estar perto de alguém calmo regula o seu próprio sistema nervoso. Isso tem nome: co-regulação.</p></div></div>
+
+    <div class="card" style="margin-top:18px;">
+      <h3><span class="pawbullet" aria-hidden="true"></span>Por que o corpo entra na conta</h3>
+      <p>O psiquiatra Bessel van der Kolk resume assim: o corpo guarda as marcas do que a gente viveu. O susto antigo fica registrado em músculos, respiração e batimentos — não só em lembranças. Por isso, mexer no corpo alcança o que às vezes só conversar não alcança.</p>
+      <div class="brainrow"><b>Janela de tolerância</b><span>A faixa em que dá para sentir sem entrar em pânico nem se desligar. Regular o corpo alarga essa janela.</span></div>
+      <div class="brainrow"><b>Nervo vago</b><span>Práticas lentas — ioga, respiração, cantarolar — fortalecem esse “freio” que devolve a calma.</span></div>
+      <div class="brainrow"><b>Ciclo de estresse</b><span>A luta-ou-fuga foi feita para terminar em movimento. Mexer o corpo completa e descarrega esse ciclo.</span></div>
+      <p class="refs">Referências da área de trauma: Bessel van der Kolk, Stephen Porges (teoria polivagal) e Dan Siegel. O livro "O corpo guarda marcas", do Bessel, tem algumas ressalvas do ponto de vista de atualização da teoria usada como fundamento, porém ainda traz reflexões válidas sobre a relação "corpo-trauma"  </p>
+    </div>
+  </section>
+
+  <!-- ============ PRA ASSISTIR ============ -->
+  <section class="panel" id="assistir" tabindex="-1" aria-label="Pra assistir">
+    <div class="eyebrow">Pra ver com carinho</div>
+    <h1>Pra assistir</h1>
+    <p class="lead">Histórias sobre pessoas que, no seu tempo, vão soltando as travas e seguindo a vida.</p>
+
+    <div class="disclaimer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div>Um aviso gentil: algumas tocam em temas pesados e podem ser gatilho. Vale assistir quando estiver se sentindo firme, de preferência com alguém por perto — e pausar sempre que precisar.</div>
+    </div>
+
+    <div class="res"><span class="ico"><span class="emoji">📺</span></span><div><b>Anne with an E</b> <span class="mediatype">· série</span><p style="margin:.2em 0 0;">Uma órfã com flashbacks de abuso que floresce na coragem e numa família escolhida.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">📺</span></span><div><b>Maid</b> <span class="mediatype">· minissérie</span><p style="margin:.2em 0 0;">Sair de uma relação abusiva e reconstruir a vida do zero — o processo real, sem mágica.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">📺</span></span><div><b>Unbelievable</b> <span class="mediatype">· minissérie</span><p style="margin:.2em 0 0;">Sobreviventes de violência sexual e o peso de ser, ou não, acreditada. Cuidadosa e sem sensacionalismo.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">🎬</span></span><div><b>As Vantagens de Ser Invisível</b> <span class="mediatype">· filme</span><p style="margin:.2em 0 0;">Uma memória de abuso que emerge aos poucos; amizade e terapia como caminho de volta.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">🎬</span></span><div><b>Divertida Mente 2</b> <span class="mediatype">· filme</span><p style="margin:.2em 0 0;">A metáfora mais gentil sobre ansiedade e o “alarme interno” que a gente viu por aqui.</p></div></div>
+    <div class="res"><span class="ico"><span class="emoji">📺</span></span><div><b>Off Campus: amores improváveis</b> <span class="mediatype">· série</span><p style="margin:.2em 0 0;">Ao longo da primeira temporada, acompanhamos Hannah, uma universitária, superando entraves após um episódio de abuso sexual na adolescência.</p></div></div>
+    </section>
+
 </main>
 
 <!-- ========================= RODAPÉ ========================= -->
@@ -494,10 +562,11 @@
   <ul class="steplist" id="steplist" aria-label="Passos para atravessar o momento">
     <li data-step><span class="num">1</span><span class="txt"><b>Nomeie:</b> <small>“Isto é um flashback.”</small></span></li>
     <li data-step><span class="num">2</span><span class="txt"><b>Lembre:</b> <small>“Sinto medo, mas estou segura. Isto é o passado.”</small></span></li>
-    <li data-step><span class="num">3</span><span class="txt"><b>Volte ao corpo:</b> <small>respire devagar, solte os músculos, desacelere.</small></span></li>
-    <li data-step><span class="num">4</span><span class="txt"><b>Acolha a criança interna:</b> <small>“Estou aqui com você. Você não está sozinha.”</small></span></li>
-    <li data-step><span class="num">5</span><span class="txt"><b>Suavize o crítico:</b> <small>“Esta onda vai passar, como sempre passou.”</small></span></li>
-    <li data-step><span class="num">6</span><span class="txt"><b>Peça apoio e tenha paciência:</b> <small>você não precisa atravessar isso sozinha.</small></span></li>
+    <li data-step><span class="num">3</span><span class="txt"><b>Defenda seu limite:</b> <small>“Tenho o direito de me proteger e de dizer não.”</small></span></li>
+    <li data-step><span class="num">4</span><span class="txt"><b>Volte ao corpo:</b> <small>respire devagar, solte os músculos, desacelere.</small></span></li>
+    <li data-step><span class="num">5</span><span class="txt"><b>Acolha a criança interna:</b> <small>“Estou aqui com você. Você não está sozinha.”</small></span></li>
+    <li data-step><span class="num">6</span><span class="txt"><b>Suavize o crítico:</b> <small>“Esta onda vai passar, como sempre passou.”</small></span></li>
+    <li data-step><span class="num">7</span><span class="txt"><b>Peça apoio e tenha paciência:</b> <small>você não precisa atravessar isso sozinha.</small></span></li>
   </ul>
 </div>
 
